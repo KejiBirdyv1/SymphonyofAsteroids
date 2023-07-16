@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class NoteObject : MonoBehaviour
 {
-    public bool canBePressed;
+    BeatScroller beatScroller;
 
+    public bool canBePressed;
     public KeyCode keyToPress;
+
+    public float frameRateNormal = 120f;
 
     void Start()
     {
-        
+        beatScroller = gameObject.GetComponentInParent<BeatScroller>();
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(keyToPress))
+  
+        // A-J notes move down on start
+        transform.Translate(Vector3.down / frameRateNormal);
+
+        if (Input.GetKeyDown(keyToPress))
         {
             if(canBePressed)
             {
                 gameObject.SetActive(false);
-
-                //GameManager.instance.NoteHit();
 
                 // Values are based the position of the note hitting the boxes (A and J)
 
@@ -40,6 +45,7 @@ public class NoteObject : MonoBehaviour
                     Debug.Log("Perfect Hit");
                     GameManager.instance.PerfectHit();
                 }
+                Destroy(this.gameObject, .2f);
             }
         }
     }
@@ -61,6 +67,7 @@ public class NoteObject : MonoBehaviour
                 canBePressed = false;
 
                 GameManager.instance.NoteMissed();
+                Destroy(this.gameObject, .2f);
             }
         }
     }

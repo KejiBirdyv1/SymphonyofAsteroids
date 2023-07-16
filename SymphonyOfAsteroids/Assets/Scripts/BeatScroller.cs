@@ -40,7 +40,7 @@ public class BeatScroller : MonoBehaviour
             Vector3 direction = new Vector3(Mathf.Cos(angleInRadians), Mathf.Sin(angleInRadians), 0f);
 
             // Move the object in the calculated direction
-            transform.position -= direction * beatTempo * Time.deltaTime;
+            //transform.position -= direction * beatTempo * Time.deltaTime;
         }
     }
 }

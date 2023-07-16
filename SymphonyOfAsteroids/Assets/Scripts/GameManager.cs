@@ -12,6 +12,22 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    [SerializeField] Spawner A;
+    [SerializeField] Spawner J;
+    [SerializeField] Spawner S;
+    [SerializeField] Spawner K;
+    [SerializeField] Spawner D;
+    [SerializeField] Spawner L;
+
+    public float RUNTIME = 0;
+    public float _songBpm = 60f;
+    public float _secPerBeat;
+    public float _songPosition;
+    public float _songPositionInBeats;
+    public float _dspSongTime;
+    public float _firstBeatOffset = 1.5f;
+
+
     public int currentScore;
     public int scorePerNote = 100;
     public int scorePerGoodNote = 125;
@@ -31,21 +47,41 @@ public class GameManager : MonoBehaviour
 
         scoreText.text = "Score: 0";
         currentCombo = 1;
+
+        _secPerBeat = 60f / _songBpm;
+        _dspSongTime = (float)AudioSettings.dspTime;
+
+        startPlaying = true;
+        theBS.hasStarted = true;
+
+        track.Play();
+
+        A.SpawnAsteroid();
+        J.SpawnAsteroid();
     }
 
     void Update()
     {
-        if(!startPlaying)
-        {
-            if(Input.anyKeyDown)
-            {
-                startPlaying = true;
-                theBS.hasStarted = true;
+        _songPosition = (float)(AudioSettings.dspTime - _dspSongTime - _firstBeatOffset);
+        _songPositionInBeats = _songPosition / _secPerBeat;
 
-                track.Play();
-            }
+        //counting down to end of track
+        RUNTIME = 114 - ((int)_songPosition);
+
+        //A.SpawnAsteroid();
+        //S.SpawnAsteroid();
+        //D.SpawnAsteroid();
+        //J.SpawnAsteroid();
+        //K.SpawnAsteroid();
+        //L.SpawnAsteroid();
+            //everything you need to call to spawn asteroids
+
+        if (RUNTIME % 5 == 0)
+        {
+            K.SpawnAsteroid(); //chain ? note (discovered by accident)
         }
     }
+
 
     public void NoteHit()
     {
