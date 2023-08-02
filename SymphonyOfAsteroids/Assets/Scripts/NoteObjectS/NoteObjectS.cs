@@ -11,6 +11,8 @@ public class NoteObjectS : MonoBehaviour
 
     public float frameRateNormal = 120f;
 
+    public GameObject hitEffect, goodEffect, perfectEffect, missEffect;
+
     void Start()
     {
         beatScroller = gameObject.GetComponentInParent<BeatScroller>();
@@ -33,16 +35,19 @@ public class NoteObjectS : MonoBehaviour
                 {
                     Debug.Log("Hit");
                     GameManager.instance.NormalHit();
+                    Instantiate(hitEffect, transform.position, transform.rotation);
                 }
                 else if (Mathf.Abs(transform.position.y) > 2.3f)
                 {
                     Debug.Log("Good Hit");
-                    GameManager.instance.NormalHit();
+                    GameManager.instance.GoodHit();
+                    Instantiate(goodEffect, transform.position, transform.rotation);
                 }
                 else
                 {
                     Debug.Log("Perfect Hit");
                     GameManager.instance.PerfectHit();
+                    Instantiate(perfectEffect, transform.position, transform.rotation);
                 }
                 Destroy(this.gameObject, .2f);
             }
@@ -66,6 +71,7 @@ public class NoteObjectS : MonoBehaviour
                 canBePressed = false;
 
                 GameManager.instance.NoteMissed();
+                Instantiate(missEffect, transform.position, transform.rotation);
                 Destroy(this.gameObject, .2f);
             }
         }

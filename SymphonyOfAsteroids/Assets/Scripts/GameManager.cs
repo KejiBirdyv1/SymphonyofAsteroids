@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     private float timeSinceLastSpawn;              // Time elapsed since the last asteroid spawn
     private int currentAsteroidTemplateIndex = 0;  // Index of the next asteroid template to use
 
+    public float SONGTIME = 0;
     public float RUNTIME = 0;
     public float _songBpm = 60f;
     public float _secPerBeat;
@@ -55,6 +56,14 @@ public class GameManager : MonoBehaviour
     public TMP_Text scoreText; 
     public TMP_Text comboText; 
 
+    public float totalNotes;
+    public float normalHits;
+    public float goodHits;
+    public float perfectHits;
+    public float missedHits;
+
+    public GameObject resultsScreen;
+    public TMP_Text finalScoreText, percentHitText, rankText, normalsText, goodsText, perfectsText, missesText;
 
     void Start()
     {
@@ -62,6 +71,8 @@ public class GameManager : MonoBehaviour
 
         scoreText.text = "Score: 0";
         currentCombo = 1;
+
+        totalNotes = asteroidTemplates.Count;
 
         _secPerBeat = 60f / _songBpm;
         _dspSongTime = (float)AudioSettings.dspTime;
@@ -83,7 +94,7 @@ public class GameManager : MonoBehaviour
         _songPositionInBeats = _songPosition / _secPerBeat;
 
         //counting down to end of track
-        RUNTIME = 114 - ((int)_songPosition);
+        RUNTIME = SONGTIME - ((int)_songPosition);
 
         //A.SpawnAsteroid();
         //S.SpawnAsteroid();
@@ -118,6 +129,54 @@ public class GameManager : MonoBehaviour
                 timeSinceLastSpawn = 0f;
             }
         }
+
+        // Results Screen
+        if(RUNTIME == 0 && !resultsScreen.activeInHierarchy)
+        {
+            resultsScreen.SetActive(true);
+
+            normalsText.text = "" + normalHits;
+            goodsText.text = goodHits.ToString();
+            perfectsText.text = perfectHits.ToString();
+            missesText.text = missedHits.ToString();
+
+            float totalHit = normalHits + goodHits + perfectHits;
+            float percentHit = (totalHit / totalNotes) * 100f;
+
+            percentHitText.text = percentHit.ToString("F1") + "%";
+
+            string rankVal = "F";
+
+            if(percentHit > 40)
+            {
+                rankVal = "D";
+            }
+            if(percentHit > 55)
+            {
+                rankVal = "C";
+            }
+            if(percentHit > 70)
+            {
+                rankVal = "B";
+            }
+            if(percentHit > 85)
+            {
+                rankVal = "A";
+            }
+            if(percentHit > 95)
+            {
+                rankVal = "S";
+            }
+            if(percentHit > 100)
+            {
+                rankVal = "SS";
+            }
+
+            rankText.text = rankVal;
+
+            finalScoreText.text = currentScore.ToString();
+
+        }
     }
 
     void StartSpawningAsteroids()
@@ -133,16 +192,13 @@ public class GameManager : MonoBehaviour
         currentAsteroidTemplateIndex = 0;
         timeSinceLastSpawn = 0f;
 
-        // Sort the asteroid templates based on spawn time (in ascending order)
-        asteroidTemplates.Sort((x, y) => x.spawnTime.CompareTo(y.spawnTime));
-
-        // Start spawning asteroids based on the first template
+        // Start spawning asteroids based on their order in the list
         if (asteroidTemplates.Count > 0)
         {
-            if (asteroidTemplates[0].asteroidIndex >= 0 &&
-                asteroidTemplates[0].asteroidIndex < asteroidSpawners.Count)
+            if (asteroidTemplates[currentAsteroidTemplateIndex].asteroidIndex >= 0 &&
+                asteroidTemplates[currentAsteroidTemplateIndex].asteroidIndex < asteroidSpawners.Count)
             {
-                asteroidSpawners[asteroidTemplates[0].asteroidIndex].SpawnAsteroid();
+                asteroidSpawners[asteroidTemplates[currentAsteroidTemplateIndex].asteroidIndex].SpawnAsteroid();
             }
             currentAsteroidTemplateIndex = 1;
         }
@@ -174,18 +230,24 @@ public class GameManager : MonoBehaviour
     {
         currentScore += scorePerNote * currentCombo;
         NoteHit();
+
+        normalHits++;
     }
 
     public void GoodHit()
     {
         currentScore += scorePerGoodNote * currentCombo;
         NoteHit();
+
+        goodHits++;
     }
 
     public void PerfectHit()
     {
         currentScore += scorePerPerfectNote * currentCombo;
         NoteHit();
+
+        perfectHits++;
     }
 
     public void NoteMissed()
@@ -196,5 +258,7 @@ public class GameManager : MonoBehaviour
         comboTracker = 0; 
 
         comboText.text = "Combo: x" + currentCombo;
+
+        missedHits++;
     }
 }
