@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
     public int comboTracker;
     public int[] comboThresholds; 
 
-    public TMP_Text scoreText; 
-    public TMP_Text comboText; 
+    public TMP_Text scoreText;
+    public TMP_Text comboText;
 
     public float totalNotes;
     public float normalHits;
@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject resultsScreen;
     public TMP_Text finalScoreText, percentHitText, rankText, normalsText, goodsText, perfectsText, missesText;
+    public TMP_Text finalScoreText2, percentHitText2, rankText2, normalsText2, goodsText2, perfectsText2, missesText2;
 
     void Start()
     {
@@ -140,10 +141,16 @@ public class GameManager : MonoBehaviour
             perfectsText.text = perfectHits.ToString();
             missesText.text = missedHits.ToString();
 
+            normalsText2.text = "" + normalHits;
+            goodsText2.text = goodHits.ToString();
+            perfectsText2.text = perfectHits.ToString();
+            missesText2.text = missedHits.ToString();
+
             float totalHit = normalHits + goodHits + perfectHits;
             float percentHit = (totalHit / totalNotes) * 100f;
 
-            percentHitText.text = percentHit.ToString("F1") + "%";
+            percentHitText.text = percentHit.ToString("F1");
+            percentHitText2.text = percentHit.ToString("F1");
 
             string rankVal = "F";
 
@@ -173,8 +180,10 @@ public class GameManager : MonoBehaviour
             }
 
             rankText.text = rankVal;
+            rankText2.text = rankVal;
 
             finalScoreText.text = currentScore.ToString();
+            finalScoreText2.text = currentScore.ToString();
 
         }
     }
@@ -221,9 +230,9 @@ public class GameManager : MonoBehaviour
         }
 
         comboText.text = "Combo: x" + currentCombo;
-     
+
         // currentScore += scorePerNote * currentCombo;
-        scoreText.text = "Score: " + currentScore; 
+        scoreText.text = "Score: " + currentScore;
     }
 
     public void NormalHit()
