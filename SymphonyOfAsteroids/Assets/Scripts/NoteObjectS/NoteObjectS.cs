@@ -21,7 +21,7 @@ public class NoteObjectS : MonoBehaviour
     void Update()
     {
         // S- notes move down on start
-        transform.Translate(Vector3.right / frameRateNormal);
+        transform.Translate(Vector3.right * Time.deltaTime * 4f);
 
         if (Input.GetKeyDown(keyToPress))
         {

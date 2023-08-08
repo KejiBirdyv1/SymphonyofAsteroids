@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NoteObjectDL : MonoBehaviour
+public class NoteObjectAL : MonoBehaviour
 {
     BeatScroller beatScroller;
 
@@ -20,8 +20,7 @@ public class NoteObjectDL : MonoBehaviour
 
     void Update()
     {
-        // A-J notes move down on start
-        transform.Translate(Vector3.up / frameRateNormal);
+        transform.Translate(Vector3.up * Time.deltaTime * 4f);
 
         if (Input.GetKeyDown(keyToPress))
         {

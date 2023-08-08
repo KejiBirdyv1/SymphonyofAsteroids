@@ -22,7 +22,7 @@ public class NoteObject : MonoBehaviour
     {
   
         // A-J notes move down on start
-        transform.Translate(Vector3.down / frameRateNormal);
+        transform.Translate(Vector3.down * Time.deltaTime * 4f);
 
         if (Input.GetKeyDown(keyToPress))
         {

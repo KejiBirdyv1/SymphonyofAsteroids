@@ -21,7 +21,7 @@ public class NoteObjectK : MonoBehaviour
     void Update()
     {
         // K- notes move Left on start
-        transform.Translate(Vector3.left / frameRateNormal);
+        transform.Translate(Vector3.left * Time.deltaTime * 4f);
 
         if (Input.GetKeyDown(keyToPress))
         {

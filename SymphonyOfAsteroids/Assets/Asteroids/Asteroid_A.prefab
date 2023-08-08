@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2565376336898240670}
   - component: {fileID: 2565376336898240665}
   - component: {fileID: 2565376336898240671}
-  - component: {fileID: 2565376336898240668}
+  - component: {fileID: 823064723229814840}
   m_Layer: 0
   m_Name: Asteroid_A
   m_TagString: Untagged
@@ -102,7 +102,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.000000059604645}
   serializedVersion: 2
   m_Radius: 0.05
---- !u!114 &2565376336898240668
+--- !u!114 &823064723229814840
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,12 +111,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2565376336898240664}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cfb5acf131e20a44a02cc4f4a4e7da4, type: 3}
+  m_Script: {fileID: 11500000, guid: 6aeef0a06612de140aa423f09772645b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
   keyToPress: 97
-  frameRateNormal: 60
+  frameRateNormal: 120
   hitEffect: {fileID: 3542591205819677042, guid: f40af8647076b084e9743f71dc3279af, type: 3}
   goodEffect: {fileID: 3290562111099280571, guid: 1af719de242bc644e945d9c29bed2f89, type: 3}
   perfectEffect: {fileID: 9182717842512394929, guid: 04970fbcc70429f4098a840fd127bebb, type: 3}
