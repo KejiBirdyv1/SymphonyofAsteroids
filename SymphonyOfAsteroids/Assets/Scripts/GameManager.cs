@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text scoreText;
     public TMP_Text comboText;
+    public TMP_Text scoreText2;
+    public TMP_Text comboText2;
 
     public float totalNotes;
     public float normalHits;
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         instance = this;
 
         scoreText.text = "Score: 0";
+        scoreText2.text = "Score: 0";
         currentCombo = 1;
 
         totalNotes = asteroidTemplates.Count;
@@ -96,19 +99,6 @@ public class GameManager : MonoBehaviour
 
         //counting down to end of track
         RUNTIME = SONGTIME - ((int)_songPosition);
-
-        //A.SpawnAsteroid();
-        //S.SpawnAsteroid();
-        //D.SpawnAsteroid();
-        //J.SpawnAsteroid();
-        //K.SpawnAsteroid();
-        //L.SpawnAsteroid();
-            //everything you need to call to spawn asteroids
-
-        // if (RUNTIME % 5 == 0)
-        // {
-        //     K.SpawnAsteroid(); //chain ? note (discovered by accident)
-        // }
 
         // Update timeSinceLastSpawn
         timeSinceLastSpawn += Time.deltaTime;
@@ -230,9 +220,11 @@ public class GameManager : MonoBehaviour
         }
 
         comboText.text = "Combo: x" + currentCombo;
+        comboText2.text = "Combo: x" + currentCombo;
 
         // currentScore += scorePerNote * currentCombo;
         scoreText.text = "Score: " + currentScore;
+        scoreText2.text = "Score: " + currentScore;
     }
 
     public void NormalHit()
@@ -267,6 +259,7 @@ public class GameManager : MonoBehaviour
         comboTracker = 0; 
 
         comboText.text = "Combo: x" + currentCombo;
+        comboText2.text = "Combo: x" + currentCombo;
 
         missedHits++;
     }

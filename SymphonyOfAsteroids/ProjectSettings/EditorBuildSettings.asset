@@ -6,12 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Start Menu.unity
-    guid: a7efac3f0da73e7439004acd29203987
+    path: Assets/Scenes/Import/StartMenu.unity
+    guid: c52c93a5a195c404bbdb005823953f05
   - enabled: 1
-    path: Assets/Scenes/BM_FurElise.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Import/SelectMenu.unity
+    guid: a303e7d39bfe13641b3f8db253141493
   - enabled: 1
-    path: Assets/Scenes/BM_Seasons.unity
-    guid: cd2ef91d6e74cc1489218e086c1fd8fd
+    path: Assets/Scenes/Import/LevelKorsakov.unity
+    guid: f92f74dba16a7a4419f889543b5d4bc0
+  - enabled: 1
+    path: Assets/Scenes/Import/LevelVivaldi.unity
+    guid: 8b4ba854e5225a142b563880ad7ca3b1
+  - enabled: 1
+    path: Assets/Scenes/Import/LevelBeethoven.unity
+    guid: c5b349d32f547154db232cd2e016f896
   m_configObjects: {}
