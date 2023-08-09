@@ -60,29 +60,29 @@ public class LoadScene : MonoBehaviour
 
     public void LoadStartMenu()
     {
-        SceneManager.LoadScene(StartMenu);
+        SceneManager.LoadScene("SelectMenu");
     }
 
     public void LoadSelectMenu()
     {
-        SceneManager.LoadScene(SelectMenu);
+        SceneManager.LoadScene("SelectMenu");
     }
 
     public void Flight()
     {
         StartCoroutine(CO_LoadBuffer());
-        SceneManager.LoadScene(LevelKorsakov);
+        SceneManager.LoadScene("LevelKorsakov");
     }
 
     public void Seasons() //helloworld
     {
         StartCoroutine(CO_LoadBuffer());
-        SceneManager.LoadScene(LevelVivaldi);
+        SceneManager.LoadScene("LevelKorsakov");
     }
     public void FurElise() //helloworld
     {
         StartCoroutine(CO_LoadBuffer());
-        SceneManager.LoadScene(LevelBeethoven);
+        SceneManager.GetSceneByBuildIndex(4);
     }
 
     private IEnumerator CO_LoadBuffer()
